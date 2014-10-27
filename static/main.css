@@ -3,6 +3,16 @@ body {
   background-color: #DDDDDD;
 }
 
+#wrapper {
+    margin-left: 3em ;
+    margin-right: 3em ;
+    margin-top: 2em ;
+    margin-bottom: 2em ;
+    padding: 1em;
+    background-color: #F5F6CE;
+    min-height: 100%;
+}
+
 #footer {
     background-color: black;
     color:white;
@@ -15,20 +25,33 @@ body {
 
 #content {
     background-color: pink;
-    min-height:30em;
+    min-height:32em;
+    max-height:32em;
     padding: 1em;
 }
 
 #list {
     padding: 1em;
     background-color: orange;
-    width: 34%;
+    width: 30%;
+    min-height:30em;
+    max-height:30em;
+    float: left;
     left: 0;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 #detail {
     padding: 1em;
     background-color: green;
-    width: 60%;
+    width: 63%;
+    min-height:30em;
+    max-height:30em;
+    float: left;
+    margin-left: 0.60em;
+}
+
+#detail_footer{
     float: right;
 }

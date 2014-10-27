@@ -26,8 +26,15 @@ def phonebook_key(phonebook_name):
 
 def get_contacts(user_id):
     phonebook_query = Contact.query(ancestor=phonebook_key(user_id)).order(-Contact.date_add)
-    return phonebook_query.fetch(10)
+    return phonebook_query.fetch(30)
 
+def delete_contact(user_id, contact_name):
+    contact = Contact.query(ancestor=phonebook_key(user_id)).get(cname=contact_name)
+    if contact:
+        contact[0].delete()
+        return True
+    else:
+        return False
 
 
 class Contact(ndb.Model):
@@ -66,14 +73,23 @@ class Profile(webapp2.RequestHandler):
                 'url_linktext':url_linktext,
                 'contacts':contacts,
             }
+            if contacts:
+                template_values['dcontact'] = contacts[0]
             self.response.write(template.render(template_values))
 
         else:
             self.redirect('/')
 
     def post(self):
-        self.redirect('/new_contact')
+        action = self.request.get('act')
+        #if action == 'edit':
+        #    pass
+        #if action == 'delete':
+        #    if self.request.get('cname'):
+        #        delete_contact(users.get_current_user().user_id(),self.request.get('cname'))
 
+        if action == 'add':
+            self.redirect('/new_contact')
 
 
 class NewContact(webapp2.RequestHandler):
@@ -94,7 +110,6 @@ class NewContact(webapp2.RequestHandler):
             self.redirect('/')
 
     def post(self):
-        print 'dsfsdfds'
         if users.get_current_user():
             contact = Contact(parent=phonebook_key(users.get_current_user().user_id()))
             contact.email = self.request.get('contact_email')
@@ -110,5 +125,7 @@ class NewContact(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/profile', Profile),
+    ('/edit', Profile),
+    ('/delete', Profile),
     ('/new_contact', NewContact),
 ], debug=True)

@@ -16,8 +16,3 @@ indexes:
   - name: date_add
     direction: desc
 
-- kind: Greeting
-  ancestor: yes
-  properties:
-  - name: date
-    direction: desc

@@ -1,17 +1,22 @@
 {% extends "base.html" %}
     {% block content %}
+        {% block list%}
         <div id="list">
             <input type="search" name="find_contact" placeholder="Find a contact">
-            <form>
-                <input type="button" name="Add" placeholder="Add" >
+            <form method="post">
+                <input type="hidden" name="action" value="add"/>
+                <input type="submit" value="Add"/>
             </form>
             <ul>
             {% for contact in contacts %}
-                <li>{{ contact.name }}</li>
+                <li>{{ contact.cname }}</li>
             {% endfor %}
             </ul>
         </div>
+        {% endblock list%}
         <div id="detail">
-
+            {% block detail %}
+                <p>This is the detail section</p>
+            {% endblock detail %}
         </div>
     {% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "profile.html" %}
+
+    {% block detail %}
+
+    <form action="/new_contact" method="post">
+        <table>
+
+            <tr>
+                <td>Name</td><td><input type="text" name="contact_name"/></td>
+            </tr>
+            <tr>
+                <td>Phone</td><td><input type="text" name="contact_phone"/></td>
+            </tr>
+            <tr>
+                <td>Email</td><td><input type="text" name="contact_email"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Create new contact">
+    </form>
+
+    {% endblock detail %}

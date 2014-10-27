@@ -1,0 +1,9 @@
+
+<div id="header">
+    {% block header %}
+        {% if user %}
+            <h4>Hello, <a>{{user.nickname()}}</a></h4>
+        {% endif %}
+        <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    {% endblock header %}
+</div>

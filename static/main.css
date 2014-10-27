@@ -1,0 +1,34 @@
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+  background-color: #DDDDDD;
+}
+
+#footer {
+    background-color: black;
+    color:white;
+}
+
+#header {
+    background-color: red;
+    color:white;
+}
+
+#content {
+    background-color: pink;
+    min-height:30em;
+    padding: 1em;
+}
+
+#list {
+    padding: 1em;
+    background-color: orange;
+    width: 34%;
+    left: 0;
+}
+
+#detail {
+    padding: 1em;
+    background-color: green;
+    width: 60%;
+    float: right;
+}

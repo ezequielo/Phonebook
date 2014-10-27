@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link type="text/css" rel="stylesheet" href="/static/main.css" />
+    <meta charset="UTF-8">
+    <title>Phonebook</title>
+</head>
+<body>
+
+    {% include "header.html" %}
+
+    <div id="content">
+    {% block content %}
+        <p>This is the content block</p>
+    {% endblock content %}
+    </div>
+
+    {% include "footer.html" %}
+
+</body>
+</html>

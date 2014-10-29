@@ -9,7 +9,14 @@
             </form>
             <ul>
             {% for contact in contacts %}
-                <li>{{ contact.cname }}</li>
+                <li>
+                    <form method="get">
+                        <input type="hidden" name="select" value="select"/>
+                        <input type="hidden" name="key" value="{{contact.key.urlsafe()}}" />
+                        <input type="submit" value="{{ contact.cname }}"/>
+                        <!--<a href="" onclick="form.submit();">{{ contact.cname }}</a>-->
+                    </form>
+                </li>
             {% endfor %}
             </ul>
         </div>

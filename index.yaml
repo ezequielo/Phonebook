@@ -15,4 +15,3 @@ indexes:
   properties:
   - name: date_add
     direction: desc
-

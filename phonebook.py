@@ -2,12 +2,14 @@
 import cgi
 import os
 import urllib
+import logging
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
 import jinja2
 import webapp2
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -28,17 +30,17 @@ def get_contacts(user_id):
     phonebook_query = Contact.query(ancestor=phonebook_key(user_id)).order(-Contact.date_add)
     return phonebook_query.fetch(30)
 
-def delete_contact(user_id, contact_name):
-    contact = Contact.query(ancestor=phonebook_key(user_id)).get(cname=contact_name)
-    if contact:
-        contact[0].delete()
-        return True
-    else:
-        return False
+def get_contact(key):
+    ckey = ndb.Key(urlsafe=key)
+    return ckey.get()
+
+def delete_contact(key):
+    ckey = ndb.Key(urlsafe=key)
+    pass
+
 
 
 class Contact(ndb.Model):
-    """Models an individual Contact."""
     cname = ndb.StringProperty(indexed=False)
     phone = ndb.StringProperty(indexed=False)
     email = ndb.StringProperty(indexed=False)
@@ -62,7 +64,10 @@ class MainPage(webapp2.RequestHandler):
 
 
 class Profile(webapp2.RequestHandler):
+
+
     def get(self):
+        logging.error(self.request)
         if users.get_current_user():
             contacts = get_contacts(users.get_current_user().user_id())
             url = users.create_logout_url(self.request.uri)
@@ -74,20 +79,27 @@ class Profile(webapp2.RequestHandler):
                 'contacts':contacts,
             }
             if contacts:
-                template_values['dcontact'] = contacts[0]
+                if self.request.get('select') == 'select':
+                    dcontact = get_contact(self.request.get("key"))
+                else:
+                    dcontact = contacts[0]
+                template_values['dcontact'] = dcontact
             self.response.write(template.render(template_values))
 
         else:
             self.redirect('/')
 
     def post(self):
+        logging.error(self.request)
         action = self.request.get('act')
         #if action == 'edit':
         #    pass
+
         #if action == 'delete':
         #    if self.request.get('cname'):
         #        delete_contact(users.get_current_user().user_id(),self.request.get('cname'))
 
+        logging.error(action)
         if action == 'add':
             self.redirect('/new_contact')
 

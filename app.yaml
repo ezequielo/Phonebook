@@ -12,7 +12,7 @@ handlers:
 - url: /.*
   script: phonebook.application
 
- - url: /profile/.*
+- url: /profile/.*
   script: phonebook.application
   login: required
 

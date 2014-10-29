@@ -36,7 +36,8 @@ def get_contact(key):
 
 def delete_contact(key):
     ckey = ndb.Key(urlsafe=key)
-    pass
+    ckey.delete()
+    return True
 
 
 
@@ -90,16 +91,16 @@ class Profile(webapp2.RequestHandler):
             self.redirect('/')
 
     def post(self):
-        logging.error(self.request)
         action = self.request.get('act')
-        #if action == 'edit':
-        #    pass
-
-        #if action == 'delete':
-        #    if self.request.get('cname'):
-        #        delete_contact(users.get_current_user().user_id(),self.request.get('cname'))
-
         logging.error(action)
+
+        if action == 'edit':
+            pass
+
+        if action == 'delete':
+            delete_contact(self.request.get("key"))
+            self.redirect('/')
+
         if action == 'add':
             self.redirect('/new_contact')
 

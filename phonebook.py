@@ -1,34 +1,23 @@
 
-import cgi
 import os
-import urllib
 import logging
-
 from google.appengine.api import users
 from google.appengine.ext import ndb
-
 import jinja2
 import webapp2
-
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-DEFAULT_GUESTBOOK_NAME = ''
-
-# We set a parent key on the 'Greetings' to ensure that they are all in the same
-# entity group. Queries across the single entity group will be consistent.
-# However, the write rate should be limited to ~1/second.
 
 def phonebook_key(phonebook_name):
-    """Constructs a Datastore key for a Contact entity."""
-    return ndb.Key('Guestbook', phonebook_name)
+    return ndb.Key('Phonebook', phonebook_name)
 
 def get_contacts(user_id):
     phonebook_query = Contact.query(ancestor=phonebook_key(user_id)).order(-Contact.date_add)
-    return phonebook_query.fetch(30)
+    return phonebook_query.fetch()
 
 def get_contact(key):
     ckey = ndb.Key(urlsafe=key)
@@ -38,7 +27,6 @@ def delete_contact(key):
     ckey = ndb.Key(urlsafe=key)
     ckey.delete()
     return True
-
 
 
 class Contact(ndb.Model):
@@ -52,7 +40,6 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         if users.get_current_user():
             self.redirect('/profile')
-
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
@@ -65,10 +52,7 @@ class MainPage(webapp2.RequestHandler):
 
 
 class Profile(webapp2.RequestHandler):
-
-
     def get(self):
-        logging.error(self.request)
         if users.get_current_user():
             contacts = get_contacts(users.get_current_user().user_id())
             url = users.create_logout_url(self.request.uri)
@@ -86,28 +70,18 @@ class Profile(webapp2.RequestHandler):
                     dcontact = contacts[0]
                 template_values['dcontact'] = dcontact
             self.response.write(template.render(template_values))
-
         else:
             self.redirect('/')
 
     def post(self):
         action = self.request.get('act')
-        logging.error(action)
-
-        if action == 'edit':
-            pass
-
         if action == 'delete':
             delete_contact(self.request.get("key"))
             self.redirect('/')
 
-        if action == 'add':
-            self.redirect('/new_contact')
-
 
 class NewContact(webapp2.RequestHandler):
     def get(self):
-
         if users.get_current_user():
             contacts = get_contacts(users.get_current_user().user_id())
             url = users.create_logout_url(self.request.uri)
@@ -130,7 +104,44 @@ class NewContact(webapp2.RequestHandler):
             contact.phone = self.request.get('contact_phone')
             contact.put()
             self.redirect('/profile')
+        else:
+            self.redirect('/')
 
+
+class EditContact(webapp2.RequestHandler):
+    def get(self):
+        if users.get_current_user():
+            contacts = get_contacts(users.get_current_user().user_id())
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+            contact = get_contact(self.request.get("key"))
+            template = JINJA_ENVIRONMENT.get_template('edit.html')
+            template_values={
+                'url':url,
+                'url_linktext':url_linktext,
+                'contacts':contacts,
+                'contact':contact,
+            }
+            self.response.write(template.render(template_values))
+        else:
+            self.redirect('/')
+
+    def post(self):
+        if users.get_current_user():
+            contact = get_contact(self.request.get("key"))
+            contact.cname = self.request.get("contact_name")
+            contact.phone = self.request.get("contact_phone")
+            contact.email = self.request.get("contact_email")
+            contact.put()
+            self.redirect('/profile')
+        else:
+            self.redirect('/')
+
+
+class Back(webapp2.RequestHandler):
+    def get(self):
+        if self.request.get('key'):
+            self.redirect('/profile?select=select&key=' + self.request.get('key'))
         else:
             self.redirect('/')
 
@@ -138,7 +149,8 @@ class NewContact(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/profile', Profile),
-    ('/edit', Profile),
     ('/delete', Profile),
     ('/new_contact', NewContact),
+    ('/edit_contact', EditContact),
+    ('/back', Back),
 ], debug=True)

@@ -1,0 +1,25 @@
+{% extends "profile.html" %}
+
+    {% block detail %}
+
+        {% if contact %}
+            <form action="/edit_contact" method="post">
+                <table>
+                    <tr>
+                        <td>Name</td><td><input type="text" name="contact_name" value="{{ contact.cname }}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td><td><input type="text" name="contact_phone" value="{{ contact.phone }}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td><td><input type="text" name="contact_email" value="{{ contact.email }}"/></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="key" value="{{ contact.key.urlsafe() }}" />
+                <input type="submit" value="Save changes">
+            </form>
+        {% endif %}
+        {% include 'back.html' %}
+
+    {% endblock detail %}
+

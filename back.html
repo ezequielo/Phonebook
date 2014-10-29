@@ -1,0 +1,11 @@
+
+{% block cancel %}
+    <div>
+        <form method="get" action="/back">
+            {% if contact %}
+                <input type="hidden" name="key" value="{{ contact.key.urlsafe() }}" />
+            {% endif %}
+            <input type="submit" value="Cancel"/>
+        </form>
+    </div>
+{% endblock cancel %}

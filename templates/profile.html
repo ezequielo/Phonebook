@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+    {% block content %}
+        {% block list%}
+        <div id="list">
+            <div id="hlist">Contact List</div>
+            <div id="list_inner">
+                <!--<input type="search" name="find_contact" placeholder="Find a contact">-->
+                <ul>
+                    {% for contact in contacts %}
+                        <li>
+                            <form method="get"  id="{{contact.key.urlsafe()}}">
+                                <input type="hidden" name="select" value="select"/>
+                                <input type="hidden" name="key" value="{{contact.key.urlsafe()}}" />
+                                <a href="#" onmouseover="this.style.color='#6CA0F5'" onmouseout="this.style.color='black'" onclick="document.getElementById('{{contact.key.urlsafe()}}').submit();">
+                                    {{ contact.cname }} <span>{{ contact.lastname }}</span></a>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <form class="button_add" method="get" action="/new_contact">
+                <input type="hidden" name="act" value="add"/>
+                <input type="submit" value="Add contact"/>
+            </form>
+        </div>
+        {% endblock list%}
+        <div id="detail">
+            <div id="hinfo">Contact Info</h3></div>
+            <div id="detail_inner">
+                {% block detail %}
+                    {% if dcontact %}
+                        <div id="contact_card">
+                            <table>
+                                <tr>
+                                    <td>Name</td><td class="span2">{{ dcontact.cname }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Surname</td><td class="span2">{{ dcontact.lastname }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td><td class="span2">{{ dcontact.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td><td class="span2">{{ dcontact.email }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="detail_footer">
+                            <form class="button_edit" method="get" action="/edit_contact">
+                                <input type="hidden" name="key" value="{{ dcontact.key.urlsafe() }}"/>
+                                <input type="hidden" name="act" value="edit"/>
+                                <input type="submit" value="Edit"/>
+                            </form>
+                            <form class="button_delete" method="post" action="/delete">
+                                <input type="hidden" name="key" value="{{ dcontact.key.urlsafe() }}"/>
+                                <input type="hidden" name="act" value="delete"/>
+                                <input type="submit" value="Delete"/>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endblock detail %}
+            </div>
+        </div>
+    {% endblock content %}

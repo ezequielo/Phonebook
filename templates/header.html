@@ -1,0 +1,33 @@
+
+<div id="header">
+    <div id="inner_header">
+        <div id="inner_p1">
+            <h5>
+                <ul>
+                    <li><a href="/" onmouseover="this.style.color='#6CA0F5'"
+                               onmouseout="this.style.color='black'"><span style="align:middle" class="octicon octicon-home"></span> Home</a></li>
+                    <li><a href="https://github.com/ezequielo/phonebook" onmouseover="this.style.color='#6CA0F5'"
+                               onmouseout="this.style.color='black'"><span style="align:middle" class="octicon octicon-info"></span> About</a></li>
+                </ul>
+            </h5>
+        </div>
+        <div id="inner_p2">
+            <h5>
+                {% block header %}
+                    {% if user %}
+                        <a><span style="align:middle" class="octicon octicon-person"></span>&nbsp;
+                            {{user.nickname()}}</a>&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                        <a href="{{ url|safe }}" onmouseover="this.style.color='#6CA0F5'" onmouseout="this.style.color='black'">
+
+                            {% if user %}
+                                <span class="octicon octicon-sign-out"></span>
+                            {% else %}
+                                <span class="octicon octicon-sign-in"></span>
+                            {% endif %}
+                            {{ url_linktext }}</a>
+                {% endblock header %}
+            </h5>
+        </div>
+    </div>
+</div>

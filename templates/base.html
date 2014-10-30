@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head lang="en">
+    <link type="text/css" rel="stylesheet" href="/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="/static/octicons/octicons.css">
+    <meta charset="UTF-8">
+    <title>Phonebook</title>
+</head>
+<body>
+    {% include "header.html" %}
+    <div id="wrapper">
+        <div id="content">
+        {% block content %}
+            <p>This is the content block</p>
+        {% endblock content %}
+        </div>
+    </div>
+    {% include "footer.html" %}
+</body>
+</html>
+{% endautoescape %}

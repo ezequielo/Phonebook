@@ -3,20 +3,20 @@ import os
 import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
-import jinja2
+from jinja2 import Environment, FileSystemLoader
 import webapp2
 
-JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+JINJA_ENVIRONMENT = Environment(
+    loader=FileSystemLoader(os.path.dirname('templates/')),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
 
 def phonebook_key(phonebook_name):
-    return ndb.Key('Phonebook', phonebook_name)
+    return ndb.Key('Guestbook', phonebook_name)
 
 def get_contacts(user_id):
-    phonebook_query = Contact.query(ancestor=phonebook_key(user_id)).order(-Contact.date_add)
+    phonebook_query = Contact.query(ancestor=phonebook_key(user_id)).order(Contact.lastname)
     return phonebook_query.fetch()
 
 def get_contact(key):
@@ -31,6 +31,7 @@ def delete_contact(key):
 
 class Contact(ndb.Model):
     cname = ndb.StringProperty(indexed=False)
+    lastname = ndb.StringProperty()
     phone = ndb.StringProperty(indexed=False)
     email = ndb.StringProperty(indexed=False)
     date_add = ndb.DateTimeProperty(auto_now_add=True)
@@ -59,6 +60,7 @@ class Profile(webapp2.RequestHandler):
             url_linktext = 'Logout'
             template = JINJA_ENVIRONMENT.get_template('profile.html')
             template_values={
+                'user':users.get_current_user(),
                 'url':url,
                 'url_linktext':url_linktext,
                 'contacts':contacts,
@@ -101,6 +103,7 @@ class NewContact(webapp2.RequestHandler):
             contact = Contact(parent=phonebook_key(users.get_current_user().user_id()))
             contact.email = self.request.get('contact_email')
             contact.cname = self.request.get('contact_name')
+            contact.lastname = self.request.get('contact_lastname')
             contact.phone = self.request.get('contact_phone')
             contact.put()
             self.redirect('/profile')
@@ -130,6 +133,7 @@ class EditContact(webapp2.RequestHandler):
         if users.get_current_user():
             contact = get_contact(self.request.get("key"))
             contact.cname = self.request.get("contact_name")
+            contact.lastname = self.request.get('contact_lastname')
             contact.phone = self.request.get("contact_phone")
             contact.email = self.request.get("contact_email")
             contact.put()

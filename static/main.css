@@ -1,6 +1,8 @@
 body {
   font-family: Verdana, Helvetica, sans-serif;
-  background-color: #DDDDDD;
+  #background: white url("images/background.png") repeat right bottom;
+  background-color: white;
+  margin: 0;
 }
 
 #wrapper {
@@ -9,49 +11,303 @@ body {
     margin-top: 2em ;
     margin-bottom: 2em ;
     padding: 1em;
-    background-color: #F5F6CE;
+
+font-family:sans-serif;
     min-height: 100%;
 }
 
 #footer {
-    background-color: black;
-    color:white;
+    background-color: #5A575C;
+    border-top: 2px solid orange;
+    color: #EDEDED;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+#inner_footer{
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+    text-align:center;
+    font-size: x-small;
+    font-style: italic;
 }
 
 #header {
-    background-color: red;
-    color:white;
+    top: 0;
+    height: 3em;
+    background-color: #E8E8E8;
+    border-bottom: 1px solid grey;
+    color:black;
+    width: 100%;
+}
+#inner_header{
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+#inner_p1{
+    width: 50%;
+    text-align: left;
+    float: left;
+}
+#inner_p1 h5{
+    margin-top:0;
+}
+#inner_p1 ul{
+    display: inline;
+}
+#inner_p1 ul li{
+    margin-right: 4em;
+    display: inline;
+    vertical-alignement: middle;
+}
+#inner_p2{
+    float: right;
+}
+#inner_p2 h5{
+    margin-top:0;
 }
 
 #content {
-    background-color: pink;
-    min-height:32em;
-    max-height:32em;
-    padding: 1em;
+    min-height: 27em;
+    max-height: 27em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    color: grey;
+}
+#hlist{
+    padding: 1em !important;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    background-color: #E8E8E8;
+    padding 1em;
+    font-weight: bold;
 }
 
+
+#hinfo{
+    margin-top:0;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    background-color: #E8E8E8;
+    padding: 1em !important;
+    font-weight: bold;
+}
+
+
 #list {
-    padding: 1em;
-    background-color: orange;
-    width: 30%;
-    min-height:30em;
-    max-height:30em;
+    width: 33%;
+    min-height: 25em;
+    max-height: 25em;
     float: left;
     left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+
+#list_inner{
+    max-height: 19em;
     overflow: scroll;
     overflow-x: hidden;
+    border-bottom: 1px grey solid;
 }
 
 #detail {
-    padding: 1em;
-    background-color: green;
     width: 63%;
-    min-height:30em;
-    max-height:30em;
-    float: left;
-    margin-left: 0.60em;
+    min-height: 25em;
+    max-height: 25em;
+    float: right;
+    margin-left: 10px;
+    margin-right: auto;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+#detail_inner{
+    border-radius: 5px;
+    max-height: 21.4em;
+    min-height: 21.4em;
+    width: 100%;
+}
+#contact_card{
+    border: 1px solid grey;
+    padding: 0.5em 2em 0.5em 2em;
+    margin: auto;
+    position:relative;
+    top: 3em;
+    width: 70%;
+    height: 50%;
+    color: black;
+}
+#contact_card table td {
+    padding-top: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #detail_footer{
+    border-top: 1px solid grey;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    top: 11.35em;
+}
+
+span{
+    font-weight: bold;
+}
+.span2{
+    color: #165CCC;
+}
+
+ul{
+    list-style-type: none;
+}
+
+# Buttons
+
+.button_add{
+    margin-top: 0.35em;
+    text-align: center;
+}
+.button_add input[type="submit"]
+{
+    border:1px solid grey !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+    color:white !important;
+    background-color: #75CF4A;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button_add input[type="submit"]:hover {
+    background-color: #50BA1E;
+}
+
+.button_add{
+    margin-top: 0.35em;
+    text-align: center;
+    bottom: 0;
+}
+
+
+.button_delete{
+    width: 45%;
+    text-align: center;
+    bottom: 0;
+    margin-top: 0.35em;
     float: right;
+}
+.button_delete input[type="submit"]
+{
+    border:1px solid grey !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+    color:white !important;
+    background-color: #F55F5F;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button_delete input[type="submit"]:hover {
+    background-color: #ED2828;
+}
+
+.button_edit{
+    width: 45%;
+    text-align: center;
+    bottom: 0;
+    float: left;
+    margin-top: 0.35em;
+}
+
+.button_edit input[type="submit"]
+{
+    border:1px solid grey !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+    color:white !important;
+    background-color: #3B82F5;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button_edit input[type="submit"]:hover {
+    background-color: #1257C7;
+}
+
+
+.button_proced{
+    position: relative;
+    top: 16em;
+    left: 2em;
+
+    border:1px solid grey !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+    color:white !important;
+    background-color: #75CF4A;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button_proced:hover{
+    background-color: #50BA1E;
+}
+
+.button_cancel{
+    position: relative;
+    top: 13.7em;
+    left: 78%;
+
+    border:1px solid grey !important;
+    text-decoration:none !important;
+    font-family:helvetica !important;
+    color:white !important;
+    background-color: #F55F5F;
+    border-radius: 5px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button_cancel:hover{
+    background-color: #ED2828;
+}
+
+a:link{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: #6CA0F5;
+    text-decoration: none;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+a:active{
+    color: black;
+    text-decoration: none;
 }

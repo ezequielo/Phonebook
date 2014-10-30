@@ -15,3 +15,14 @@ indexes:
   properties:
   - name: date_add
     direction: desc
+
+- kind: Contact
+  ancestor: yes
+  properties:
+  - name: lastname
+
+- kind: Contact
+  ancestor: yes
+  properties:
+  - name: lastname
+    direction: desc

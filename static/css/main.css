@@ -320,3 +320,6 @@ a:active{
 	outline: solid thin red;
 }
 
+#slider_div{
+    text-align:center;
+}

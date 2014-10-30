@@ -2,9 +2,20 @@
 {% autoescape true %}
 <html>
 <head lang="en">
-    <link type="text/css" rel="stylesheet" href="/static/main.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
     <link type="text/css" rel="stylesheet" href="/static/octicons/octicons.css">
-    <script src="static/script.js" type="text/javascript"></script>
+    <script src="static/js/script.js" type="text/javascript"></script>
+    <!-- JQuery from Google -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="/static/js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="static/css/jquery.bxslider.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function(){
+            $('.bxslider').bxSlider();
+        });
+    </script>
     <meta charset="UTF-8">
     <title>Phonebook</title>
 </head>
@@ -13,7 +24,15 @@
     <div id="wrapper">
         <div id="content">
         {% block content %}
-            <p>This is the content block</p>
+            <div id="slider_div">
+                <h4>Phonebook</h4>
+                <p>Phonebook is a webapp that allows you to manage your own contact list!</p>
+                <ul class="bxslider">
+                    <li><img src="/static/images/pb2.png" /></li>
+                    <li><img src="/static/images/screen.png" /></li>
+                    <li><img src="/static/images/glogin.png" /></li>
+                </ul>
+            </div>
         {% endblock content %}
         </div>
     </div>

@@ -1,4 +1,5 @@
 
+
 function noVacio(campo){
     if(campo.value.length==0){
         return false;

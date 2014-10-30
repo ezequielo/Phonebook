@@ -9,20 +9,3 @@ indexes:
 # manually, move them above the marker line.  The index.yaml file is
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
-
-- kind: Contact
-  ancestor: yes
-  properties:
-  - name: date_add
-    direction: desc
-
-- kind: Contact
-  ancestor: yes
-  properties:
-  - name: lastname
-
-- kind: Contact
-  ancestor: yes
-  properties:
-  - name: lastname
-    direction: desc

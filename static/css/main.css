@@ -20,8 +20,10 @@ font-family:sans-serif;
     background-color: #5A575C;
     border-top: 2px solid orange;
     color: #EDEDED;
+    height: 8em;
     position: absolute;
     bottom: 0;
+    margin-top: 5em;
     width: 100%;
 }
 #inner_footer{
@@ -113,6 +115,7 @@ font-family:sans-serif;
 
 
 #list_inner{
+    min-height: 19em;
     max-height: 19em;
     overflow: scroll;
     overflow-x: hidden;
@@ -255,7 +258,7 @@ ul{
 
 .button_proced{
     position: relative;
-    top: 16em;
+    top: 30%;
     left: 2em;
 
     border:1px solid grey !important;
@@ -276,7 +279,7 @@ ul{
 
 .button_cancel{
     position: relative;
-    top: 13.7em;
+    bottom: 20%;
     left: 78%;
 
     border:1px solid grey !important;
@@ -322,4 +325,12 @@ a:active{
 
 #slider_div{
     text-align:center;
+}
+
+#dataForm{
+    height: 22.8em !important;
+}
+#cancelbuttondiv{
+    position: relative;
+    top: -3.4em;
 }

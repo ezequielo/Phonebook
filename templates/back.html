@@ -1,6 +1,6 @@
 
 {% block cancel %}
-    <div>
+    <div id="cancelbuttondiv">
         <form method="get" action="/back">
             {% if contact %}
                 <input type="hidden" name="key" value="{{ contact.key.urlsafe() }}" />

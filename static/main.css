@@ -311,3 +311,12 @@ a:active{
     color: black;
     text-decoration: none;
 }
+
+.status{
+	height: 12px;
+}
+.error{
+	background-color: Indianred;
+	outline: solid thin red;
+}
+

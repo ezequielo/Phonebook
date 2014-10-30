@@ -2,21 +2,25 @@
 
     {% block detail %}
 
-    <form action="/new_contact" method="post">
+    <form id="dataForm" action="/new_contact" method="post" onsubmit='return comprobar()'>
         <div id="contact_card">
             <table>
 
                 <tr>
-                    <td>Name</td><td><input type="text" name="contact_name"/></td>
+                    <td>Name</td><td><input id="contact_name" type="text" name="contact_name" onchange='validar_string(this)'/></td>
+                    <td><img id="statuscontact_name" src="/static/images/wrong.png" class="status" /></td>
                 </tr>
                 <tr>
-                    <td>Last name</td><td><input type="text" name="contact_lastname"/></td>
+                    <td>Last name</td><td><input type="text" id="contact_lastname" name="contact_lastname" onchange='validar_string(this)'/></td>
+                    <td><img id="statuscontact_lastname" src="/static/images/wrong.png" class="status" /></td>
                 </tr>
                 <tr>
-                    <td>Phone</td><td><input type="text" name="contact_phone"/></td>
+                    <td>Phone</td><td><input id="contact_phone" type="text" name="contact_phone" onchange='validar_tlf(this)'/></td>
+                    <td><img id="statuscontact_phone" src="/static/images/wrong.png" class="status" /></td>
                 </tr>
                 <tr>
-                    <td>Email</td><td><input type="text" name="contact_email"/></td>
+                    <td>Email</td><td><input type="text" id="contact_email" name="contact_email" onchange='validar_email(this)'/></td>
+                    <td><img id="statuscontact_email" src="/static/images/wrong.png" class="status" /></td>
                 </tr>
             </table>
         </div>

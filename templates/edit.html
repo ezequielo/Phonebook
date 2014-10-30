@@ -3,20 +3,32 @@
     {% block detail %}
 
         {% if contact %}
-            <form action="/edit_contact" method="post">
+            <form action="/edit_contact" method="post" onsubmit='return comprobar()'>
                 <div id="contact_card">
                     <table>
                         <tr>
-                            <td>Name</td><td><input type="text" name="contact_name" value="{{ contact.cname }}"/></td>
+                            <td>Name</td><td><input type="text" id="contact_name" name="contact_name"
+                                         onchange='validar_string(this)' onmouseout="validar_string(this)"
+                                         value="{{ contact.cname }}"/></td>
+                            <td><img id="statuscontact_name" class="status" /></td>
                         </tr>
                         <tr>
-                            <td>Last name</td><td><input type="text" name="contact_lastname" value="{{ contact.lastname }}"/></td>
+                            <td>Last name</td><td><input type="text" id="contact_lastname" name="contact_lastname"
+                                          onchange='validar_string(this)' onmouseout="validar_string(this)"
+                                          value="{{ contact.lastname }}"/></td>
+                            <td><img id="statuscontact_lastname" class="status" /></td>
                         </tr>
                         <tr>
-                            <td>Phone</td><td><input type="text" name="contact_phone" value="{{ contact.phone }}"/></td>
+                            <td>Phone</td><td><input type="text" id="contact_phone" name="contact_phone"
+                                               onchange='validar_tlf(this)' onmouseout="validar_tlf(this)"
+                                               value="{{ contact.phone }}"/></td>
+                            <td><img id="statuscontact_phone" class="status" /></td>
                         </tr>
                         <tr>
-                            <td>Email</td><td><input type="text" name="contact_email" value="{{ contact.email }}"/></td>
+                            <td>Email</td><td><input type="text" id="contact_email" name="contact_email"
+                                        onchange='validar_email(this)' onmouseout="validar_email(this)"
+                                        value="{{ contact.email }}"/></td>
+                            <td><img id="statuscontact_email" class="status" /></td>
                         </tr>
                     </table>
                 </div>

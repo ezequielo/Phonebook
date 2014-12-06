@@ -1,0 +1,23 @@
+language: python
+python:
+- "2.7"
+# command to install dependencies
+install:
+- pip install pytest pytest-cov
+- pip install mockito
+- pip install coveralls
+- pip install radon
+- pip install pep8
+# after success
+after_success:
+- radon mi phonebook.py
+- radon cc phonebook.py
+- radon raw phonebook.py
+- coveralls
+- pep8 phonebook.py
+
+#notifications
+notifications:
+emails:
+- errodate@alu.upo.es
+on_failure: always
